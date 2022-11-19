@@ -1,0 +1,65 @@
+<!-- <html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {
+        'packages':['geochart'],
+      });
+      google.charts.setOnLoadCallback(drawRegionsMap);
+
+      const allCountries = 
+      [
+        ["Country", 'Found'],["Bhutan",1],["Democratic Republic of the Congo",2],["Liechtenstein",3],["Maldives",4],["Sudan",5],["Zimbabwe",6],["Mauritania",7],["Mozambique",8],["Nigeria",9],["Swaziland",10],["Tanzania",11],["Iraq",12],["Guyana",13],["Namibia",14],["Senegal",15],["Turkmenistan",16],["Afghanistan",17],["Andorra",18],["Fiji",19],["Gabon",20],["Uzbekistan",21],["Cameroon",22],["Cuba",23],["Faroe Islands",24],["El Salvador",25],["Caribbean",26],["Ethiopia",27],["Mongolia",28],["Puerto Rico",29],["Samoa",30],["Myanmar",31],["Nicaragua",32],["Seychelles",33],["Tajikistan",34],["Dominican Republic",35],["Guinea",36],["Barbados",37],["CI",38],["Laos",39],["Libya",40],["Panama",41],["Bahrain",42],["Benin",43],["Ghana",44],["Haiti",45],["Montenegro",46],["Somalia",47],["Syria",48],["Ecuador",49],["Honduras",50],["Madagascar",51],["Papua New Guinea",52],["Tunisia",53],["Angola",54],["Botswana",55],["Cyprus",56],["Algeria",57],["Bahamas",58],["New Caledonia",59],["Uganda",60],["Yemen",61],["Zambia",62],["Antarctica",63],["Paraguay",64],["Jamaica",65],["Palestine",66],["Bolivia",67],["Bosnia and Herzegovina",68],["Vietnam",69],["Kenya",70],["Luxembourg",71],["Niger",72],["Kuwait",73],["Hawaii",74],["Scotland",75],["Cambodia",76],["Uruguay",77],["Kyrgyzstan",78],["Saudi Arabia",79],["Indonesia",80],["Azerbaijan",81],["United Arab Emirates",82],["Mauritius",83],["Morocco",84],["Albania",85],["South Korea",86],["Kazakhstan",87],["Macedonia",88],["Venezuela",89],["Taiwan",90],["Qatar",91],["Jordan",92],["Iceland",93],["Guatemala",94],["Costa Rica",95],["Hong Kong",96],["San Marino",97],["Colombia",98],["Moldova",99],["Armenia",100],["Malta",101],["Nepal",102],["Lebanon",103],["Malaysia",104],["Serbia",105],["Peru",106],["Trinidad and Tobago",107],["Lithuania",108],["Estonia",109],["Georgia",110],["Iran",111],["Chile",112],["Latvia",113],["Thailand",114],["Egypt",115],["Slovenia",116],["Mexico",117],["Belarus",118],["Slovakia",119],["Sri Lanka",120],["Croatia",121],["Philippines",122],["Bangladesh",123],["Turkey",124],["Romania",125],["Italy",126],["South Africa",127],["Hungary",128],["Pakistan",129],["Portugal",130],["Ukraine",131],["Greece",132],["Oman",133],["Argentina",134],["Singapore",135],["Bulgaria",136],["Japan",137],["Czech Republic ",138],["Ireland",139],["China",140],["Finland",141],["Brazil",142],["Norway",143],["Austria",144],["Denmark",145],["Belgium",146],["New Zealand",147],["Spain",148],["Switzerland",149],["Russia",150],["Poland",151],["Israel",152],["Sweden",153],["Netherlands",154],["France",155],["Australia",156],["Canada",157],["India",158],["Germany",159],["United Kingdom",160],["United States",161],["Unknown",162]
+      ]
+      
+      let colorList = 
+      [
+
+      ]
+
+      for (var c = 0; c < allCountries.length; c++)
+      {
+          var defaultColorList = ['Red', 'Yellow', 'Blue', 'Orange', 'Green', 'Violet', '#ff5349', '#FFAE42', 'green', '#0D98BA', '#4d1a7f', '#922b3e']
+
+          var randNum = Math.floor(Math.random() * (defaultColorList.length + 1)); // 0 - 10
+
+          colorList.push(defaultColorList[randNum])
+      
+        }
+
+      function drawRegionsMap() {
+        var data = google.visualization.arrayToDataTable(    
+        // [
+        //   ['Country', 'Found'],
+        //   ['Germany', 1],
+        //   ['United States', 1],
+        //   ['Brazil', 1],
+        //   ['Canada', 2],
+        //   ['France', 1],
+        //   ['RU', 1]
+        // ]
+        
+        allCountries
+        
+        );
+
+        var options = {
+          colorAxis: {colors: colorList}, // last value is completed country
+          datalessRegionColor: '#e3eaef', // uncompleted default country
+          defaultColor: 'green',
+          legend: 'none',
+        };
+
+        var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+        <div id="regions_div" style="width: 100vw; height: 97vh;"></div>
+    </div>
+  </body>
+</html> -->
+
