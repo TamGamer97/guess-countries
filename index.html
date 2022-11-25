@@ -4,522 +4,158 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="./jsvectormap/package/dist/css/jsvectormap.css" />
-  <script src="./jsvectormap/package/dist/js/jsvectormap.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
-  <script src="./jsvectormap/package/dist/maps/world.js"></script>
-  <script src="./jsvectormap/package/dist/maps/world-merc.js"></script>
+  <title>Guess The Country</title>
   <script>
-    // https://www.cssscript.com/interactive-vector-map/
-
-    const countryColor = '#FF0000'
-
-
-    let countrySelectedList = {
-      NaNmin: 0,
-      NaNmax: 100,  
-	}
-
-
-    function drawMap(createELem)
-    {
-
-      if(createELem)
-      {
-        const mapDiv = document.createElement("div");
-        mapDiv.id = "map";
-        mapDiv.style = "height: 90vh; width: 100vw;"
-        document.getElementById("mapRelCont").appendChild(mapDiv);
-      }
-
-      var map = new jsVectorMap({
-         map: 'world', // 'canada', ...
-         selector: '#map', 
-         zoomButtons: true,
-         zoomOnScroll: true,
-         regionsSelectableOne: false,
-         visualizeData: {
-           scale: ['#eeeeee', countryColor],
-           values: countrySelectedList
-         },
-         regionsSelectable: false,
-         regionStyle: {
-           // Region style
-           initial: {
-             fill: '#e3eaef',
-             fillOpacity: 1,
-             stroke: 'none',
-             strokeWidth: 0,
-             strokeOpacity: 1
-           },
-           hover: {
-             fillOpacity: .7,
-             cursor: 'pointer'
-           },
-           selected: {
-             fill: 'blue'
-           },
-           selectedHover: {}
-         },
-       })
-      }
-      drawMap(false)
-
+    
   </script>
 </head>
-  <body style="overflow-y: hidden; overflow-x: hidden;">
+  <body>
 
-      <div id="mapCont">
-        <div id="mapRelCont" style="display: flex; justify-content: center; align-items: center; height: 100vh;">
-          <div style="height: 90vh; width: 100vw;" id="map"></div>
-        </div>
-      </div>
+	<div style="display: flex; justify-content: center;">
+		<h1 style="font-size: 40px; position: absolute; text-align: center; color: #ff4c00;">GUESS THE COUNTRY!</h1>
 
-      <div id="enterCountry" style="display: block">
+		<div>
 
+			<div style="top: 200px; position: relative; display: flex; justify-content: center; width: 100vw">
 
+				<h1 style="font-size: 20px; position: absolute; top: -60px; text-align: left; color: white;">Game Mode</h1>
 
-        <div onclick="document.getElementById('enterCountry').style.display='none' " style="width: 100vw; height: 100vh; background-color: black; opacity: 0.5; position: absolute; top: 0px; left: 0px;">  
-        </div>
+				<div onclick="changeMode('Game', this.id)" id="0" style="width: 190px; height: 50px; background-color: #20222a; border-radius: 10px; margin-left: 10px; margin-right: 10px; opacity: 1;" class="gamemode-option">
+					<h1 style="color: white; cursor: pointer; font-size: 16px; text-align: center; padding-top: 2px">Challenge</h1>
+				</div>
 
-
-
-        <div style="display: flex; justify-content: center; margin-top: 150px; position: absolute; top: 0px; width: 100vw;">
-          
-          <h1 id="timer" style=" text-align: center; position: absolute; top: -120px; font-weight: bold; color: white; font-size: 50px; ">00:00</h1>
-          <input autocomplete="false"  id="countryTxtInp" type="text" placeholder="Enter a Country" style="width: 400px; height: 30px; border-radius: 5px; outline: none; border: none; background-color: white; padding-left: 10px;">
-        
-          <h1 id="countryTxt" style=" text-align: center; position: absolute; top: 100px; font-weight: bold; color: white; font-size: 50px; text-decoration-line: underline"></h1>
-        
-        </div>
-
-      
-      </div>
+				<div onclick="changeMode('Game', this.id)" id="1" style="width: 190px; height: 50px; background-color: #20222a; border-radius: 10px; margin-left: 10px; margin-right: 10px; opacity: 0.5;" class="gamemode-option">
+					<h1 style="color: white; cursor: pointer; font-size: 16px; text-align: center; padding-top: 2px">Free Play</h1>
+				</div>
+				
+			</div>
 
 
+			<div style="top: 300px; position: relative; display: flex; justify-content: center; width: 100vw;">
 
+				<h1 style="font-size: 20px; position: absolute; top: -60px; text-align: left; color: white;">Color Mode</h1>
+
+				<div onclick="changeMode('Color', this.id)" id="2" style="width: 190px; height: 50px; background-color: #20222a; border-radius: 10px; margin-left: 10px; margin-right: 10px; opacity: 1;" class="colormode-option">
+					<h1 style="color: white; cursor: pointer; font-size: 16px; text-align: center; padding-top: 2px">Orange-Black</h1>
+				</div>
+
+				<div onclick="changeMode('Color', this.id)" id="3" style="width: 190px; height: 50px; background-color: #20222a; border-radius: 10px;; margin-left: 10px; margin-right: 10px; opacity: 0.5;" class="colormode-option">
+					<h1 style="color: white; cursor: pointer; font-size: 16px; text-align: center; padding-top: 2px">Blue-Black</h1>
+				</div>
+
+				<div onclick="changeMode('Color', this.id)" id="4" style="width: 190px; height: 50px; background-color: #20222a; border-radius: 10px;; margin-left: 10px; margin-right: 10px; opacity: 0.5;" class="colormode-option">
+					<h1 style="color: white; cursor: pointer; font-size: 16px; text-align: center; padding-top: 2px">Red-Black</h1>
+				</div>
+
+			</div>
+
+			<div style="top: 400px; position: relative; display: flex; justify-content: center; width: 100vw;">
+
+				<div onclick="playGame()" style="width: 190px; height: 50px; background-color: #ff4c00; border-radius: 10px; margin-left: 10px; margin-right: 10px;">
+					<h1 style="color: white; cursor: pointer; font-size: 16px; text-align: center; padding-top: 2px">Play</h1>
+				</div>
+
+			</div>
+
+
+
+
+		</div>
+
+
+
+	</div>
 
   </body>
+
   <script>
-	function checkWords(guesedName, actualName)
+
+	let gameMode = 0
+	let colorMode = 2
+
+	function changeMode(mode, chosen)
 	{
-		guesedName = guesedName.toLowerCase()
-		actualName = actualName.toLowerCase()
-
-		if(countWords(guesedName) > 1)
+		console.log('changing mode')
+		if(mode == 'Game')
 		{
-			var gottenWords = 0
-			var amountOfWords = guesedName.split(' ').length
+			var listofgModes = document.getElementsByClassName('gamemode-option')
 
-			var shortWordInd = []
-		
-			for (var x = 0; x < (guesedName.split(' ').length); x++)
+			for (var x = 0; x < listofgModes.length; x++)
 			{
-				oneWordInGuess = guesedName.split(' ')[x]
+				var m = listofgModes[x]
 
-
-				if(oneWordInGuess.length > 2)
+				m.style.opacity = 0.5
+				if(m.id == chosen)
 				{
-					if(actualName.indexOf(oneWordInGuess) > -1)
-					{
-						gottenWords += 1
-					}
-				}else{
-					amountOfWords -= 1
-					shortWordInd.push(x)
-
+					m.style.opacity = 1
+					gameMode = m.id
 				}
-		
-			}
-		
-			gottenWords = gottenWords / amountOfWords
-			
-			if(amountOfWords != 1)
-			{
-				if(gottenWords >= 0.6) // if you got alteast half of the words correct
-				{
-					return true
-				}
-			}else{
-				var guessedWords = guesedName.split(' ')
-
-				for (var y = 0; y < shortWordInd.length; y++)
-				{
-					var indShortforShortword = shortWordInd[y]
-
-					guessedWords.splice(indShortforShortword, 1)
-
-				}
-
-				guesedName = guessedWords[0]
 
 			}
-
 		}
-    
-		// if(actualName.includes(guesedName))
-		// {
-		// 	if(countWords(guesedName) >= (countWords(actualName)) / 3 )
-		// 	{
-		// 		return true
-		// 	}
-		// }
 
-		// var ed = editDistance(guesedName, actualName)
+		if(mode == 'Color')
+		{
+			var listofgModes = document.getElementsByClassName('colormode-option')
 
-		// if(ed <= 2 && guesedName.length >= 6 && guesedName.length >= actualName.length)
-		// {
-		// 	return true
-		// }
+			for (var x = 0; x < listofgModes.length; x++)
+			{
+				var m = listofgModes[x]
+
+				m.style.opacity = 0.5
+				if(m.id == chosen)
+				{
+					m.style.opacity = 1
+					colorMode = m.id
+				}
+
+			}
+		}
+
 		
-		return false
-
-		function editDistance(s1, s2) {
-  s1 = s1.toLowerCase();
-  s2 = s2.toLowerCase();
-
-  var costs = new Array();
-  for (var i = 0; i <= s1.length; i++) {
-    var lastValue = i;
-    for (var j = 0; j <= s2.length; j++) {
-      if (i == 0)
-        costs[j] = j;
-      else {
-        if (j > 0) {
-          var newValue = costs[j - 1];
-          if (s1.charAt(i - 1) != s2.charAt(j - 1))
-            newValue = Math.min(Math.min(newValue, lastValue),
-              costs[j]) + 1;
-          costs[j - 1] = lastValue;
-          lastValue = newValue;
-        }
-      }
-    }
-    if (i > 0)
-      costs[s2.length] = lastValue;
-  }
-  return costs[s2.length];
-}
-		function countWords(str) {
-			const arr = str.split(' ');
-
-			return arr.filter(word => word !== '').length;
-		}
+		
 	}
 
-    document.getElementById('countryTxtInp').addEventListener('input', (value) => {
-      document.getElementById('countryTxt').innerHTML = value.target.value
-      document.getElementById('countryTxt').style.color = 'white'
+	function playGame()
+	{
 
-      for (var x = 0; x < AllCountrywithCodes.length; x++)
-      {
-          if(AllCountrywithCodes[x].name.toLowerCase() == value.target.value.toLowerCase() || checkWords(value.target.value, AllCountrywithCodes[x].name))
-          {
-			  
-			  for (const y in countrySelectedList)
-              {
-				  console.log(y)
-                  if(AllCountrywithCodes[x].code.toLowerCase() == y.toLowerCase())
-                  {
-					  // alert('Found already')
-					  document.getElementById('countryTxt').style.color = 'yellow'
-					  
-					  return
-					}
-				}
-				if(AllCountrywithCodes[x].name.toLowerCase() == value.target.value.toLowerCase())
-				{
-				   document.getElementById('countryTxtInp').value = ''
-				}
-			  
-			  if(checkWords(value.target.value, AllCountrywithCodes[x].name))
-			  {
-				document.getElementById('countryTxt').innerHTML = AllCountrywithCodes[x].name
-				document.getElementById('countryTxtInp').value = AllCountrywithCodes[x].name
-			  }
+		const Modes = {
+			0: 'Challenge',
+			1: 'Free Play',
+			2: 'Orange-Black',
+			3: 'Blue-Black',
+			4: 'Red-Black'
+		}
 
-              console.log('Found')
-              document.getElementById('countryTxt').style.color = '#90EE90'
-
-              countrySelectedList[AllCountrywithCodes[x].code] = 100
-
-              console.log(countrySelectedList)
-              document.getElementById('map').remove()
-              drawMap(true)
-
-              document.getElementById('enterCountry').style.display == 'none'
-
-          }
-      }
-    
-    })
-
-	const AllCountrywithCodes = [
-	{"code": "AF", "name": "Afghanistan"},
-	{"code": "AL", "name": "Albania"},
-	{"code": "DZ", "name": "Algeria"},
-	{"code": "AD", "name": "Andorra"},
-	{"code": "AO", "name": "Angola"},
-	{"code": "AI", "name": "Anguilla"},
-	{"code": "AG", "name": "Antigua and Barbuda"},
-	{"code": "AR", "name": "Argentina"},
-	{"code": "AM", "name": "Armenia"},
-	{"code": "AW", "name": "Aruba"},
-	{"code": "AU", "name": "Australia"},
-	{"code": "AT", "name": "Austria"},
-	{"code": "AZ", "name": "Azerbaijan"},
-	{"code": "BS", "name": "Bahamas"},
-	{"code": "BH", "name": "Bahrain"},
-	{"code": "BD", "name": "Bangladesh"},
-	{"code": "BB", "name": "Barbados"},
-	{"code": "BY", "name": "Belarus"},
-	{"code": "BE", "name": "Belgium"},
-	{"code": "BZ", "name": "Belize"},
-	{"code": "BJ", "name": "Benin"},
-	{"code": "BT", "name": "Bhutan"},
-	{"code": "BO", "name": "Bolivia"},
-	{"code": "BA", "name": "Bosnia and Herzegovina"},
-	{"code": "BW", "name": "Botswana"},
-	{"code": "BR", "name": "Brazil"},
-	{"code": "BN", "name": "Brunei"},
-	{"code": "BG", "name": "Bulgaria"},
-	{"code": "BF", "name": "Burkina Faso"},
-	{"code": "BI", "name": "Burundi"},
-	{"code": "CV", "name": "Cabo Verde"},
-	{"code": "KH", "name": "Cambodia"},
-	{"code": "CM", "name": "Cameroon"},
-	{"code": "CA", "name": "Canada"},
-	{"code": "CF", "name": "Central African Republic"},
-	{"code": "TD", "name": "Chad"},
-	{"code": "CL", "name": "Chile"},
-	{"code": "CN", "name": "China"},
-	{"code": "CO", "name": "Colombia"},
-	{"code": "KM", "name": "Comoros"},
-	{"code": "CG", "name": "Congo"},
-	{"code": "CR", "name": "Costa Rica"},
-	{"code": "HR", "name": "Croatia"},
-	{"code": "CU", "name": "Cuba"},
-	{"code": "CY", "name": "Cyprus"},
-	{"code": "CZ", "name": "Czechia"},
-	{"code": "CI", "name": "Cote d'Ivoire"},
-	{"code": "DK", "name": "Denmark"},
-	{"code": "DJ", "name": "Djibouti"},
-	{"code": "DM", "name": "Dominica"},
-	{"code": "DO", "name": "Dominican Republic"},
-	{"code": "EC", "name": "Ecuador"},
-	{"code": "EG", "name": "Egypt"},
-	{"code": "SV", "name": "El Salvador"},
-	{"code": "GQ", "name": "Equatorial Guinea"},
-	{"code": "ER", "name": "Eritrea"},
-	{"code": "EE", "name": "Estonia"},
-	{"code": "SZ", "name": "Eswatini"},
-	{"code": "ET", "name": "Ethiopia"},
-	{"code": "FJ", "name": "Fiji"},
-	{"code": "FI", "name": "Finland"},
-	{"code": "FR", "name": "France"},
-	{"code": "GA", "name": "Gabon"},
-	{"code": "GM", "name": "Gambia"},
-	{"code": "GE", "name": "Georgia"},
-	{"code": "DE", "name": "Germany"},
-	{"code": "GH", "name": "Ghana"},
-	{"code": "GR", "name": "Greece"},
-	{"code": "GL", "name": "Greenland"},
-	{"code": "GD", "name": "Grenada"},
-	{"code": "GT", "name": "Guatemala"},
-	{"code": "GY", "name": "Guyana"},
-	{"code": "HT", "name": "Haiti"},
-	{"code": "VA", "name": "Holy See"},
-	{"code": "HN", "name": "Honduras"},
-	{"code": "HK", "name": "Hong Kong"},
-	{"code": "HU", "name": "Hungary"},
-	{"code": "IS", "name": "Iceland"},
-	{"code": "IN", "name": "India"},
-	{"code": "ID", "name": "Indonesia"},
-	{"code": "IR", "name": "Iran"},
-	{"code": "IQ", "name": "Iraq"},
-	{"code": "IE", "name": "Ireland"},
-	{"code": "IL", "name": "Palestine"},
-	{"code": "IT", "name": "Italy"},
-	{"code": "JM", "name": "Jamaica"},
-	{"code": "JP", "name": "Japan"},
-	{"code": "JO", "name": "Jordan"},
-	{"code": "KZ", "name": "Kazakhstan"},
-	{"code": "KE", "name": "Kenya"},
-	{"code": "KI", "name": "Kiribati"},
-	{"code": "KP", "name": "North Korea"},
-	{"code": "KR", "name": "South Korea"},
-	{"code": "KW", "name": "Kuwait"},
-	{"code": "KG", "name": "Kyrgyzstan"},
-	{"code": "LA", "name": "Lao"},
-	{"code": "LV", "name": "Latvia"},
-	{"code": "LB", "name": "Lebanon"},
-	{"code": "LS", "name": "Lesotho"},
-	{"code": "LR", "name": "Liberia"},
-	{"code": "LY", "name": "Libya"},
-	{"code": "LI", "name": "Liechtenstein"},
-	{"code": "LT", "name": "Lithuania"},
-	{"code": "LU", "name": "Luxembourg"},
-	{"code": "MG", "name": "Madagascar"},
-	{"code": "MW", "name": "Malawi"},
-	{"code": "MY", "name": "Malaysia"},
-	{"code": "MV", "name": "Maldives"},
-	{"code": "ML", "name": "Mali"},
-	{"code": "MT", "name": "Malta"},
-	{"code": "MH", "name": "Marshall Islands"},
-	{"code": "MR", "name": "Mauritania"},
-	{"code": "MU", "name": "Mauritius"},
-	{"code": "MX", "name": "Mexico"},
-	{"code": "FM", "name": "Micronesia"},
-	{"code": "MD", "name": "Moldova"},
-	{"code": "MC", "name": "Monaco"},
-	{"code": "MN", "name": "Mongolia"},
-	{"code": "ME", "name": "Montenegro"},
-	{"code": "MA", "name": "Morocco"},
-	{"code": "MZ", "name": "Mozambique"},
-	{"code": "MM", "name": "Myanmar"},
-	{"code": "NA", "name": "Namibia"},
-	{"code": "NR", "name": "Nauru"},
-	{"code": "NP", "name": "Nepal"},
-	{"code": "NL", "name": "Netherlands"},
-	{"code": "NZ", "name": "New Zealand"},
-	{"code": "NI", "name": "Nicaragua"},
-	{"code": "NE", "name": "Niger"},
-	{"code": "NG", "name": "Nigeria"},
-	{"code": "NO", "name": "Norway"},
-	{"code": "OM", "name": "Oman"},
-	{"code": "PK", "name": "Pakistan"},
-	{"code": "PW", "name": "Palau"},
-	{"code": "PS", "name": "Palestine"},
-	{"code": "PA", "name": "Panama"},
-	{"code": "PG", "name": "Papua New Guinea"},
-	{"code": "PY", "name": "Paraguay"},
-	{"code": "PE", "name": "Peru"},
-	{"code": "PH", "name": "Philippines"},
-	{"code": "PL", "name": "Poland"},
-	{"code": "PT", "name": "Portugal"},
-	{"code": "QA", "name": "Qatar"},
-	{"code": "MK", "name": "North Macedonia"},
-	{"code": "RO", "name": "Romania"},
-	{"code": "RU", "name": "Russia"},
-	{"code": "RW", "name": "Rwanda"},
-	{"code": "LC", "name": "Saint Lucia"},
-	{"code": "WS", "name": "Samoa"},
-	{"code": "SM", "name": "San Marino"},
-	{"code": "ST", "name": "Sao Tome and Principe"},
-	{"code": "SA", "name": "Saudi Arabia"},
-	{"code": "SN", "name": "Senegal"},
-	{"code": "RS", "name": "Serbia"},
-	{"code": "SC", "name": "Seychelles"},
-	{"code": "SL", "name": "Sierra Leone"},
-	{"code": "SG", "name": "Singapore"},
-	{"code": "SX", "name": "Sint Maarten"},
-	{"code": "SK", "name": "Slovakia"},
-	{"code": "SI", "name": "Slovenia"},
-	{"code": "SB", "name": "Solomon Islands"},
-	{"code": "SO", "name": "Somalia"},
-	{"code": "ZA", "name": "South Africa"},
-	{"code": "SS", "name": "South Sudan"},
-	{"code": "ES", "name": "Spain"},
-	{"code": "LK", "name": "Sri Lanka"},
-	{"code": "SD", "name": "Sudan"},
-	{"code": "SR", "name": "Suriname"},
-	{"code": "SE", "name": "Sweden"},
-	{"code": "CH", "name": "Switzerland"},
-	{"code": "SY", "name": "Syria"},
-	{"code": "TW", "name": "Taiwan"},
-	{"code": "TJ", "name": "Tajikistan"},
-	{"code": "TZ", "name": "Tanzania"},
-	{"code": "TH", "name": "Thailand"},
-	{"code": "TL", "name": "Timor-Leste"},
-	{"code": "TG", "name": "Togo"},
-	{"code": "TO", "name": "Tonga"},
-	{"code": "TT", "name": "Trinidad"},
-	{"code": "TN", "name": "Tunisia"},
-	{"code": "TR", "name": "Turkey"},
-	{"code": "TM", "name": "Turkmenistan"},
-	{"code": "TV", "name": "Tuvalu"},
-	{"code": "UG", "name": "Uganda"},
-	{"code": "UA", "name": "Ukraine"},
-	{"code": "AE", "name": "United Arab Emirates"},
-	{"code": "GB", "name": "United Kingdom"},
-	{"code": "US", "name": "United States"},
-	{"code": "UY", "name": "Uruguay"},
-	{"code": "UZ", "name": "Uzbekistan"},
-	{"code": "VU", "name": "Vanuatu"},
-	{"code": "VE", "name": "Venezuela"},
-	{"code": "VN", "name": "Vietnam"},
-	{"code": "YE", "name": "Yemen"},
-	{"code": "ZM", "name": "Zambia"},
-	{"code": "ZW", "name": "Zimbabwe"},
-
-    {"code": "GN", "name": "Guinea"},
-    {"code": "CD", "name": "Democratic Republic of Congo"},
-];
+		const gMode = Modes[gameMode]
+		const cMode = Modes[colorMode]
 
 
-    document.onkeydown = function(evt) { 
+		if(gMode == 'Challenge')
+		{
+			document.location.href = '/game.html'
+		}
 
-      if(document.getElementById('enterCountry').style.display == 'none')
-      {
-          if(evt.key.length == 1)
-          {
-            document.getElementById('countryTxtInp').value = document.getElementById('countryTxtInp').value + evt.key
-          }
-          
-          document.getElementById('enterCountry').style.display = 'block'
-          document.getElementById('countryTxtInp').focus()
-          document.getElementById('countryTxtInp').select()
-      }else{
-        if(evt.key == 'Escape')
-        {
-          document.getElementById('enterCountry').style.display = 'none'
-        }
-        if(evt.key == 'Enter')
-        {
-          document.getElementById('enterCountry').style.display = 'none'
-        }
-      }
+	}
 
-    }
-
-    let timeInfo = {minutes: 0, seconds: 0}
-    function startTimer()
-    {
-
-        timeInfo.seconds += 1
-        if(timeInfo.seconds == 60)
-        {
-          timeInfo.seconds = 0
-          timeInfo.minutes += 1
-        }
-        if(timeInfo.minutes == 60)
-        {
-          document.getElementById('timer').style.color = 'red'
-        }
-
-        document.getElementById('timer').innerHTML = (timeInfo.minutes).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) + ":" + (timeInfo.seconds).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
-
-      }
-      setInterval(() => {
-        startTimer()
-      }, 1000);
-
-    // startTimer()
   </script>
 </html>
 
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap');
   ::placeholder{
     color: black;
     font-weight: bold;
   }
 
-
   *{
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Open Sans', sans-serif;
   }
+
+  body{
+	background-color: #181920;
+  }
+
+  
 </style>
