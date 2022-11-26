@@ -22,6 +22,10 @@
       NaNmax: 100,  
 	}
 
+	let foundCountysList = [
+		// 'United States'
+	]
+
 
     function drawMap(createELem)
     {
@@ -34,12 +38,43 @@
         document.getElementById("mapRelCont").appendChild(mapDiv);
       }
 
+	  var activeRegions = [
+		"al", "an", "ey", "gh", "ic", "ke", "mu", "mz", "na", "ni", "za", "tz", "tu", "ug"
+	];
+
       var map = new jsVectorMap({
          map: 'world', // 'canada', ...
          selector: '#map', 
          zoomButtons: true,
          zoomOnScroll: true,
          regionsSelectableOne: false,
+		onRegionTooltipShow: function (tooltip, code) {
+			// console.log(code.text())
+
+			var cName = code.text()
+
+			if(cName == 'Israel')
+			{
+				cName = 'Palestine'
+			}
+
+			code.css({ fontSize: "15px", backgroundColor: 'transparent', border: 'none' });
+			code.getElement().innerHTML = '';
+
+			for (var f = 0; f < foundCountysList.length; f++)
+			{
+				var c = foundCountysList[f]
+				if(c.toLowerCase() == cName.toLowerCase())
+				{
+					// county found so can show name
+					code.css({ fontSize: "15px", backgroundColor: countryColor });
+					code.getElement().innerHTML = cName;
+					break
+				}
+			}
+
+		},
+		 showTooltip: true,
          visualizeData: {
            scale: ['#eeeeee', countryColor],
            values: countrySelectedList
@@ -72,10 +107,16 @@
   <body style="overflow-y: hidden; overflow-x: hidden; background-color: #181920;">
 
       <div id="mapCont">
-          <h1 id="scoreCounter" style="position: absolute; right: 20px; color: white; text-align: center; font-size: 20;">0/197</h1>
+          <h1 id="scoreCounter" style="position: absolute; right: 20px; color: white; text-align: center; font-size: 20;">0/205</h1>
+		  <div onclick="location.href = '/' " style="width: 100px; height: 30px; background-color: #282933; border: solid none; border-radius: 5px; position: absolute;">
+			<h1 style="color: white; font-size: 15px; text-align: center; margin-top: 3px;">Menu</h1>
+		  </div> 
+		  <div style="display: flex; justify-content: center;">
+			  <h1 id="infoTxt" style="position: absolute; bottom: 0px; color: white; text-align: center; font-size: 18px;">Start Typing to Guess a Country...</h1>
+		  </div>
           <div id="mapRelCont" style="display: flex; justify-content: center; align-items: center; height: 100vh;">
-          <div style="height: 90vh; width: 100vw;" id="map"></div>
-        </div>
+          	<div style="height: 90vh; width: 100vw;" id="map"></div>
+          </div>
       </div>
 
       <div id="enterCountry" style="display: block">
@@ -222,7 +263,7 @@
 			  
 			  for (const y in countrySelectedList)
               {
-				  console.log(y)
+				//   console.log(y)
                   if(AllCountrywithCodes[x].code.toLowerCase() == y.toLowerCase())
                   {
 					  // alert('Found already')
@@ -242,13 +283,19 @@
 				document.getElementById('countryTxtInp').value = AllCountrywithCodes[x].name
 			  }
 
-              console.log('Found')
-              document.getElementById('scoreCounter').innerHTML = (JSON.parse(document.getElementById('scoreCounter').innerHTML.split('/')[0]) + 1) + '/197'
+              console.log('Found ' + AllCountrywithCodes[x].name)
+			  foundCountysList.push(AllCountrywithCodes[x].name)
+              document.getElementById('scoreCounter').innerHTML = (JSON.parse(document.getElementById('scoreCounter').innerHTML.split('/')[0]) + 1) + '/205'
               document.getElementById('countryTxt').style.color = '#90EE90'
 
               countrySelectedList[AllCountrywithCodes[x].code] = 100
 
-              console.log(countrySelectedList)
+			  if(AllCountrywithCodes[x].name == 'Palestine')
+			  {
+				countrySelectedList['IL'] = 100
+			  }
+
+            //   console.log(countrySelectedList)
               document.getElementById('map').remove()
               drawMap(true)
 
@@ -305,7 +352,7 @@
 	{"code": "HR", "name": "Croatia"},
 	{"code": "CU", "name": "Cuba"},
 	{"code": "CY", "name": "Cyprus"},
-	{"code": "CZ", "name": "Czechia"},
+	{"code": "CZ", "name": "Czech"},
 	{"code": "CI", "name": "Cote d'Ivoire"},
 	{"code": "DK", "name": "Denmark"},
 	{"code": "DJ", "name": "Djibouti"},
@@ -343,7 +390,6 @@
 	{"code": "IR", "name": "Iran"},
 	{"code": "IQ", "name": "Iraq"},
 	{"code": "IE", "name": "Ireland"},
-	{"code": "IL", "name": "Palestine"},
 	{"code": "IT", "name": "Italy"},
 	{"code": "JM", "name": "Jamaica"},
 	{"code": "JP", "name": "Japan"},
@@ -403,7 +449,7 @@
 	{"code": "PL", "name": "Poland"},
 	{"code": "PT", "name": "Portugal"},
 	{"code": "QA", "name": "Qatar"},
-	{"code": "MK", "name": "North Macedonia"},
+	{"code": "MK", "name": "Macedonia"},
 	{"code": "RO", "name": "Romania"},
 	{"code": "RU", "name": "Russia"},
 	{"code": "RW", "name": "Rwanda"},
@@ -459,8 +505,32 @@
 
     {"code": "GN", "name": "Guinea"},
     {"code": "CD", "name": "Democratic Republic of Congo"},
+	{"code": "XS", "name": "Somaliland"},
+	{"code": "FK", "name": "Falkland"},
+	{"code": "PR", "name": "Puerto Rico"},
+	{"code": "EH", "name": "West Sahara"},
+	{"code": "GW", "name": "Guinea-Bissau"},
+	{"code": "XK", "name": "Kosovo"},
+	{"code": "NC", "name": "New Caledonia"},
+	{"code": "TF", "name": "Antarctic Lands"},
 ];
 
+	function cheakyWin()
+	{
+		var count = 0
+		for (var x = 0; x < AllCountrywithCodes.length; x++)
+		{
+			var c = AllCountrywithCodes[x]
+			foundCountysList.push(c.name)
+			countrySelectedList[c.code] = 100
+			count += 1
+		}
+		countrySelectedList['IL'] = 100 // for palestine
+		document.getElementById('map').remove()
+		drawMap(true)
+
+		document.getElementById('scoreCounter').innerHTML = count +'/205'
+	}
 
     document.onkeydown = function(evt) { 
 
